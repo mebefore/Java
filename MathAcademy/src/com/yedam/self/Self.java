@@ -2,6 +2,7 @@ package com.yedam.self;
 
 public class Self {
 
+	private String memberId;
 	private String memberName;
 	private String memberClass;
 	private int selfCounter;
@@ -13,6 +14,12 @@ public class Self {
 	}
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
+	}
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 	public String getMemberClass() {
 		return memberClass;

@@ -73,7 +73,8 @@ public class MemberDAO extends DAO {
 				member.setMemberPw(rs.getString("member_pw"));
 				member.setMemberNum(rs.getInt("member_num"));
 				member.setMemberAddr(rs.getString("member_addr"));
-				member.setMemberSchool(rs.getString("member_school"));
+				list.add(member);
+				//member.setMemberSchool(rs.getString("member_school"));
 			
 //				member.setClassCredate(rs.getDate("class_credate"));
 				

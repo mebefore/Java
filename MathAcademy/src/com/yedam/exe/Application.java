@@ -41,13 +41,13 @@ public class Application {
 			
 			
 			}else if(MemberService.memberInfo != null) {
-			//로그인한 정보를 토대로 업무를 나눔(고객(N)/은행원(B))
+		
 			if(MemberService.memberInfo.getMemberType().equals("S")) {
 				//S = 학생
 				new MemberApp();
 			}else if(MemberService.memberInfo.getMemberType().equals("M")) {
 				//M = 관리자
-				new ManagerApp();
+				new ClassApp();
 			}
 		}
 	}

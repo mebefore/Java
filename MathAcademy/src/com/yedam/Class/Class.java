@@ -5,7 +5,7 @@ public class Class {
 
 //			member_name varchar2(20) primary key,
 //			member_teacher varchar2(50),
-//			member_class varchar(20),
+//			member_class varchar2(20),
 //			member_grade varchar2(10));
 	
 	private String memberName;
