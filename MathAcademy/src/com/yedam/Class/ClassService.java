@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.yedam.member.Member;
+import com.yedam.member.MemberDAO;
 
 public class ClassService {
 	Scanner sc = new Scanner(System.in);
@@ -40,7 +41,7 @@ public class ClassService {
 		if(member != null) {
 			//이름 아이디 폰번 주소 학교 타입
 			System.out.println("| 이름 : " + member.getMemberName());
-			System.out.println("|이름 : " + member.getMemberId());
+			System.out.println("| 아이디 : " + member.getMemberId());
 			System.out.println("| 휴대폰 번호 : " + member.getMemberNum());
 			System.out.println("| 주소 : " + member.getMemberAddr());
 			System.out.println("| 학교 : " + member.getMemberSchool());
@@ -90,6 +91,41 @@ public class ClassService {
 		
 	}
 	
+	//학생 강의 정보 등록 4-2-2 CLASS
+	//NAME TEACHER CLASS GRADE
+		public void insertClass() {
+			Class cs = new Class();
+			System.out.println("=== 학생 강의 정보 등록=== ");
+			
+			System.out.println("| 학생 이름 입력 > ");
+			cs.setMemberName(sc.nextLine());
+			
+			System.out.println("| 담당 선생님 입력 > ");
+			cs.setMemberTeacher(sc.nextLine());
+			
+			System.out.println("| 클래스 입력 > ");
+			cs.setMemberClass(sc.nextLine());
+			
+			System.out.println("| 수학 등급 입력 > ");
+			cs.setMemberGrade(sc.nextLine());
+			
+			int result = ClassDAO.getInstance().insertClass(cs);
+			
+			if(result > 0) {
+				System.out.println("학생 강의 정보 입력 완료");
+			} else {
+				System.out.println("학생 강의 정보를 다시 입력해주세요.");
+			}
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//1-2 나의 수강 정보
 		public void getClassInfo2() {
@@ -106,8 +142,161 @@ public class ClassService {
 		}
 	
 	
-	
-	
-	
-	
+	//4-3-1 전번 수정
+		public void updatePhone() {
+			Member member = new Member();
+			System.out.println("==========회원 정보 수정==========");
+			
+			System.out.println("| 수정할 회원 이름 > ");
+			member.setMemberName(sc.nextLine());
+			
+			System.out.println("| 수정할 전화번호 > ");
+			member.setMemberNum(Integer.parseInt(sc.nextLine()));
+			
+			int result = ClassDAO.getInstance().updatePhone(member);
+			
+			if(result > 0) {
+				System.out.println("전화번호 수정 완료");
+			}else {
+				System.out.println("전화번호 수정 실패");
+			}
+		
+			
+			
+			
+		}
+
+
+	//주소 수정
+		public void updateAddr() {
+			Member member = new Member();
+			System.out.println("========주소 수정========");
+			
+			System.out.println("| 수정할 회원 이름 > ");
+			member.setMemberName(sc.nextLine());
+			
+			System.out.println("| 수정 주소 입력 > ");
+			member.setMemberAddr(sc.nextLine());
+			
+			int result = ClassDAO.getInstance().updateAddr(member);
+			
+			if(result > 0) {
+				System.out.println("주소 수정 완료");
+			}else {
+				System.out.println("주소 수정 실패");
+			}
+			
+		}
+		
+	//학교수정
+		public void updateSchool() {
+			Member member = new Member();
+			System.out.println("========학교 수정========");
+			
+			System.out.println("| 수정할 회원 이름 > ");
+			member.setMemberName(sc.nextLine());
+			
+			System.out.println("| 수정 학교 입력 > ");
+			member.setMemberSchool(sc.nextLine());
+			
+			int result = ClassDAO.getInstance().updateSchool(member);
+			
+			if(result > 0) {
+				System.out.println("학교 수정 완료");
+			}else {
+				System.out.println("학교 수정 실패");
+			}
+		}
+		
+	//선생님 수정
+		public void updateTeacher() {
+			Class cs = new Class();
+			System.out.println("========선생님 수정========");
+			
+			System.out.println("| 수정할 회원 이름 > ");
+			cs.setMemberName(sc.nextLine());
+			
+			System.out.println("| 수정 선생님 입력 > ");
+			cs.setMemberTeacher(sc.nextLine());
+			
+			int result = ClassDAO.getInstance().updateTeacher(cs);
+			
+			if(result > 0) {
+				System.out.println("선생님 수정 완료");
+			}else {
+				System.out.println("선생님 수정 실패");
+			}
+		}
+		
+		
+		//등급 수정 
+		public void updateType() {
+			Member member = new Member();
+			System.out.println("=========== 타입 수정 ============");
+			System.out.println("관리자 - M , 회원 - S ");
+			
+			System.out.println("| 수정할 회원 이름 > ");
+			member.setMemberName(sc.nextLine());
+			
+			System.out.println("| 수정할 타입 입력 > ");
+			member.setMemberType(sc.nextLine());
+			
+			int result = ClassDAO.getInstance().updateType(member);
+			
+			if(result > 0) {
+				System.out.println("등급 수정 완료");
+			}else {
+				System.out.println("등급 수정 실패");
+			}
+			
+		}
+		
+	//학급 수정
+			public void updateClass() {
+				Class cs = new Class();
+				System.out.println("========학급 수정========");
+					
+				System.out.println("| 수정할 회원 이름 > ");
+				cs.setMemberName(sc.nextLine());
+					
+				System.out.println("| 수정 학급 입력 > ");
+				cs.setMemberClass(sc.nextLine());
+					
+				int result = ClassDAO.getInstance().updateClass(cs);
+					
+				if(result > 0) {
+					System.out.println("학급 수정 완료");
+				}else {
+					System.out.println("학급 수정 실패");
+				}
+			}
+				
+			//학급 수정
+			public void updateGrade() {
+				Class cs = new Class();
+				System.out.println("========수학 등급 수정========");
+				
+				System.out.println("| 수정할 회원 이름 > ");
+				cs.setMemberName(sc.nextLine());
+					
+				System.out.println("| 수정 등급 입력 > ");
+				cs.setMemberGrade(sc.nextLine());
+					
+				int result = ClassDAO.getInstance().updateGrade(cs);
+					
+				if(result > 0) {
+					System.out.println("등급 수정 완료");
+				}else {
+					System.out.println("등급 수정 실패");
+				}
+			}			
+				
+			
+				
+				
+				
+				
+				
+				
+				
 }

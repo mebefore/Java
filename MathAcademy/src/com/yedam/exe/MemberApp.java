@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import com.yedam.Class.ClassService;
 import com.yedam.member.MemberService;
+import com.yedam.self.SelfService;
 import com.yedam.subject.SubjectService;
 
 public class MemberApp {
@@ -11,6 +12,7 @@ public class MemberApp {
 	MemberService ms = new MemberService();
 	SubjectService ss = new SubjectService();
 	ClassService cs = new ClassService();
+	SelfService sf = new SelfService();
 	
 	public MemberApp() {
 		memberRun();
@@ -32,7 +34,7 @@ public class MemberApp {
 						ms.getMemberInfo();
 						
 					}else if(selectNo.equals("2")) {
-						//2.김선생 어쩌고 그거 나오게
+						
 						cs.getClassInfo2();
 					}else {
 						break;
@@ -47,6 +49,35 @@ public class MemberApp {
 					break;
 					
 				case "3" :
+					System.out.println("| 1. 나의 자습실 현황 | 2. 자습실 신청 | 3. 뒤로가기");
+					selectNo = sc.nextLine();
+					if(selectNo.equals("1")) {
+						//sf.getselfInfo();
+					//IF 신청시 ->오늘 (05/25)의 이용 가능 시간 15:00~22:00 (신청했으면)
+					//-> 자습실 내역이 존재하지 않습니다 (신청하지 않았으면)
+						
+					}else if(selectNo.equals("2")) {
+						System.out.println("| 1. 신청 | 2. 연장 | 3. 취소 | 4. 뒤로가");
+						selectNo = sc.nextLine();
+						
+						if(selectNo.equals("1")) {
+							//신청 
+							sf.selfApply();
+							
+						}else if(selectNo.equals("2")) {
+							sf.selfExtend();
+							
+						}else if(selectNo.equals("3")){
+							//취소
+							sf.selfCancel();
+							
+						}else{
+							break;
+						}
+						
+					}else {
+						break;
+					}
 					
 					break;
 				

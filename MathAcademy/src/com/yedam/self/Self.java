@@ -1,42 +1,49 @@
 package com.yedam.self;
 
+import java.sql.Date;
+
 public class Self {
 
+	
+	
 	private String memberId;
 	private String memberName;
-	private String memberClass;
-	private int selfCounter;
-	private String selfToday;
+	private Date selfStrat;
+	private Date selfFinish;
+	private String selfApply;
 	
 	
-	public String getMemberName() {
-		return memberName;
-	}
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
-	}
 	public String getMemberId() {
 		return memberId;
 	}
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public String getMemberClass() {
-		return memberClass;
+	public String getMemberName() {
+		return memberName;
 	}
-	public void setMemberClass(String memberClass) {
-		this.memberClass = memberClass;
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
-	public int getSelfCounter() {
-		return selfCounter;
+	public Date getSelfStrat() {
+		return selfStrat;
 	}
-	public void setSelfCounter(int selfCounter) {
-		this.selfCounter = selfCounter;
+	public void setSelfStrat(Date selfStrat) {
+		this.selfStrat = selfStrat;
 	}
-	public String getSelfToday() {
-		return selfToday;
+	public Date getSelfFinish() {
+		return selfFinish;
 	}
-	public void setSelfToday(String selfToday) {
-		this.selfToday = selfToday;
+	public void setSelfFinish(Date selfFinish) {
+		this.selfFinish = selfFinish;
 	}
+	public String getSelfApply() {
+		return selfApply;
+	}
+	public void setSelfApply(String selfApply) {
+		this.selfApply = selfApply;
+	}
+	
+	
+	
 }
