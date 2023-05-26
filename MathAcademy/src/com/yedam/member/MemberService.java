@@ -13,7 +13,7 @@ public class MemberService {
 	// MemberService ms = new MemberService();
 
 	public void login() {
-		System.out.println("=====로그인=====");
+		System.out.println("로그인 >");
 		System.out.println("ID를 입력하세요.");
 
 		String id = sc.nextLine();
@@ -26,6 +26,8 @@ public class MemberService {
 		if (member != null) {
 			if (member.getMemberPw().equals(pw)) {
 				System.out.println("로그인 성공!");
+				System.out.println("");
+				System.out.println("ENTER KEY를 입력하세요.");
 				memberInfo = member;
 			} else {
 				System.out.println("비밀번호 불일치");
@@ -79,6 +81,7 @@ public class MemberService {
 			System.out.println("비밀번호는 " + list.get(i).getMemberPw() + "입니다.");
 			System.out.println("휴대폰 번호는 " + list.get(i).getMemberNum() + "입니다.");
 			System.out.println("등록된 주소는 " + list.get(i).getMemberAddr() + "입니다.");
+			System.out.println("등록된 학교는 " + list.get(i).getMemberSchool() + "입니다.");
 
 			// System.out.println("학원등록일은 " + list.get(i).getMemberId()+"입니다.");
 		}

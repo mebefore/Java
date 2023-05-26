@@ -3,6 +3,9 @@ package com.yedam.subject;
 import java.util.List;
 import java.util.Scanner;
 
+import com.yedam.Class.Class;
+import com.yedam.Class.ClassDAO;
+
 public class SubjectService {
 	Scanner sc = new Scanner(System.in);
 	
@@ -19,6 +22,7 @@ public class SubjectService {
 			System.out.println("기하 : " + list.get(i).getGeometry()+"입니다.");
 			
 		}
+		
 	}
 	
 	
@@ -61,5 +65,29 @@ public class SubjectService {
 					
 					
 					
-			}	
+		}
+			
+		//SUBJECT 조회
+			//1.전체 수강생 조회
+			public void getMemberSubject() {
+				System.out.println("=========전체 학생 등급 조회=========");
+				List<Subject> list = SubjectDAO.getInstance().getMemberSubject();
+				
+				for(int i=0; i<list.size(); i++) {
+					System.out.print(i+1+".");
+					System.out.print(" 아이디 : " + list.get(i).getMemberId()+" |");
+					System.out.println(" 이름 : " + list.get(i).getMemberName()+" ");
+					System.out.print("    미적분 : " + list.get(i).getCalculus()+"|");
+					System.out.print(" 확률과 통계 : " + list.get(i).getProbability()+ " |");
+					System.out.print(" 수학1 : " + list.get(i).getMath1()+" |");
+					System.out.print(" 수학2 : " + list.get(i).getMath2()+" |");
+					System.out.println(" 기하 : " + list.get(i).getGeometry());
+					
+					System.out.println("");
+					
+					
+				}
+			}
+			
+		
 }

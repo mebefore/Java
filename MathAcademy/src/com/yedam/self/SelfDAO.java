@@ -50,8 +50,8 @@ private static SelfDAO selfDao = null;
 		int result = 0;
 		try {
 			conn();
-			String sql = "UPDATE SELF \r\n SET SELF_APPLY = 'N', SELF_START = NULL,"
-					+ "SELF_FINISH = NULL\r\n WHERE MEMBER_ID = ? ";
+			String sql = "UPDATE SELF SET SELF_FINISH=SYSDATE+7 WHERE MEMBER_ID = ?";
+			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1,MemberService.memberInfo.getMemberId());
 			
@@ -84,6 +84,41 @@ private static SelfDAO selfDao = null;
 		}
 		return result;
 	}
+	
+	
+	//나의 자습실 내역
+		public Self getselfInfo(String memberId) {
+			Self self = null;
+			try {
+				conn();
+				String sql = "SELECT * FROM SELF WHERE MEMBER_ID = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, memberId);
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					self = new Self();
+					self.setMemberId(rs.getString("member_id"));
+					self.setSelfStart(rs.getDate("self_start"));
+					self.setSelfFinish(rs.getDate("self_finish"));
+					self.setSelfApply(rs.getString("self_apply"));
+					
+				}
+						
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				disconn();
+			}
+			return self;
+		}
+		
+		
+		
+		
+
+	
 }
 
 	

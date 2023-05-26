@@ -7,8 +7,7 @@ public class Self {
 	
 	
 	private String memberId;
-	private String memberName;
-	private Date selfStrat;
+	private Date selfStart;
 	private Date selfFinish;
 	private String selfApply;
 	
@@ -19,17 +18,12 @@ public class Self {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public String getMemberName() {
-		return memberName;
+	
+	public Date getSelfStart() {
+		return selfStart;
 	}
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
-	}
-	public Date getSelfStrat() {
-		return selfStrat;
-	}
-	public void setSelfStrat(Date selfStrat) {
-		this.selfStrat = selfStrat;
+	public void setSelfStart(Date selfStart) {
+		this.selfStart = selfStart;
 	}
 	public Date getSelfFinish() {
 		return selfFinish;

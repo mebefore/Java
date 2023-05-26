@@ -83,4 +83,36 @@ public class SubjectDAO extends DAO{
 			}
 			return result;
 		}
+		
+		//subject 전체 조회
+		public List<Subject> getMemberSubject(){
+			List<Subject> list = new ArrayList<>();
+			Subject sj = null;
+			
+			try {
+				conn();
+				String sql = "SELECT * FROM SUBJECT ORDER BY 1";
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					sj = new Subject();
+					sj.setMemberId(rs.getString("member_id"));
+					sj.setMemberName(rs.getString("member_name"));
+					sj.setCalculus(rs.getString("Calculus"));
+					sj.setProbability(rs.getString("Probability"));
+					sj.setMath1(rs.getString("Math1"));
+					sj.setMath2(rs.getString("Math2"));
+					sj.setGeometry(rs.getString("Geometry"));
+					list.add(sj);
+					
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				disconn();
+			}
+			return list;
+			
+		}
 }

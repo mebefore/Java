@@ -42,7 +42,6 @@ public class MemberApp {
 					
 					break;
 					
-				
 					
 				case "2" :
 					ss.subjectGrade();
@@ -52,8 +51,8 @@ public class MemberApp {
 					System.out.println("| 1. 나의 자습실 현황 | 2. 자습실 신청 | 3. 뒤로가기");
 					selectNo = sc.nextLine();
 					if(selectNo.equals("1")) {
-						//sf.getselfInfo();
-					//IF 신청시 ->오늘 (05/25)의 이용 가능 시간 15:00~22:00 (신청했으면)
+						sf.getselfInfo();
+					
 					//-> 자습실 내역이 존재하지 않습니다 (신청하지 않았으면)
 						
 					}else if(selectNo.equals("2")) {
@@ -93,7 +92,9 @@ public class MemberApp {
 	}
 	
 	private void menu() {
-		System.out.println("1.내 정보 확인 | 2. 강의 등급 확인 | 3. 자습실 내역 | 4. 뒤로가기");
+		System.out.println("** 김수학수학학원 ** ========================================");
+		System.out.println("< 1.내 정보 확인 | 2. 강의 등급 확인 | 3. 자습실 내역 | 4. 로그아웃 >");
+		System.out.println("=========================================================");
 	}
 }
 

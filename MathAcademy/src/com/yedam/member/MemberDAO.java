@@ -66,17 +66,15 @@ public class MemberDAO extends DAO {
 			
 			while(rs.next()) {
 				member = new Member();
-				//아이디, 비번, 이름, 주소, 폰번, 수강시작일?;
+				// 이름, 아이디, 비번 , 번호, 주소, 학교
 				
 				member.setMemberName(rs.getString("member_name"));
 				member.setMemberId(rs.getString("member_id"));
 				member.setMemberPw(rs.getString("member_pw"));
 				member.setMemberNum(rs.getInt("member_num"));
 				member.setMemberAddr(rs.getString("member_addr"));
+				member.setMemberSchool(rs.getString("member_school"));
 				list.add(member);
-				//member.setMemberSchool(rs.getString("member_school"));
-			
-//				member.setClassCredate(rs.getDate("class_credate"));
 				
 			}
 			

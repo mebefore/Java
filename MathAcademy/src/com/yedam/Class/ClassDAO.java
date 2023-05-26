@@ -6,6 +6,8 @@ import java.util.List;
 import com.yedam.common.DAO;
 import com.yedam.member.Member;
 import com.yedam.member.MemberService;
+import com.yedam.self.Self;
+import com.yedam.subject.Subject;
 
 public class ClassDAO extends DAO {
 	
@@ -57,14 +59,24 @@ public class ClassDAO extends DAO {
 		
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//단건 조회
-	public Member getonlyMember(String memberName) {
+	public Member getonlyMember(String memberId) {
 		Member member = null;
 		try {
 			conn();
-			String sql = "SELECT * FROM MEMBER WHERE MEMBER_NAME = ?";
+			String sql = "SELECT * FROM MEMBER WHERE MEMBER_ID = ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, memberName);
+			pstmt.setString(1, memberId);
 			
 			rs = pstmt.executeQuery();
 			
@@ -85,6 +97,64 @@ public class ClassDAO extends DAO {
 		return member;
 		
 	}
+	
+	
+	//회원 삭제
+	public int deleteMember(String memberId) {
+		int result = 0;
+		try {
+			conn();
+			String sql = "DELETE MEMBER WHERE MEMBER_ID = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,memberId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			disconn();
+		}
+		return result;
+	}
+	
+	
+	
+	
+	//자습실 멤버 조회
+	//1.전체 수강생 조회
+		//관리자가 모든 사람의 정보를 조회해야되는 상황
+		public List<Self> getSelfInfo(){
+			List<Self> list = new ArrayList<>();
+			Self sf = null;
+			
+			try {
+				conn();
+				//조인해서 member subject 다 보게 할까
+				//관리자로 로그인해서 하려면 뭔가 조건이 있어야대는데 'M'이걸로
+				String sql = "select * from self ORDER BY 1";
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				
+				while(rs.next()) {
+					sf = new Self();
+					sf.setMemberId(rs.getString("member_id"));
+					sf.setSelfStart(rs.getDate("self_start"));
+					sf.setSelfFinish(rs.getDate("self_finish"));
+					sf.setSelfApply(rs.getString("self_apply"));
+					list.add(sf);
+					
+				}
+						
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				disconn();
+			}
+			return list;
+			
+		}
 	
 	
 	
@@ -135,10 +205,6 @@ public class ClassDAO extends DAO {
 		}
 		return result;
 	}
-	
-	
-	
-	
 	
 	
 	

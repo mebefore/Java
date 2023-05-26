@@ -19,7 +19,9 @@ public class Application {
 		while (run) {
 			if (MemberService.memberInfo == null) {
 
+				System.out.println("=======김수학수학학원입니다=======");
 				System.out.println("1. 로그인 | 2. 회원가입 | 3. 종료");
+				System.out.println("============================");
 				int menu = Integer.parseInt(sc.nextLine());
 				if (menu == 1) {
 					// 로그인 기능

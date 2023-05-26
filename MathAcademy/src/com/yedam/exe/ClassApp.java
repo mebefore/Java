@@ -20,18 +20,27 @@ public class ClassApp {
 			menu();
 			String menuNo = sc.nextLine();
 			
+			
 			if(menuNo.equals("1")) {
-				//1. 전체 수강생 조회
-				cs.getMember();
+				System.out.println("");
+				System.out.println("  1. 학생 학원 정보 조회 | 2. 학생 과목 등급 조회");
+				System.out.println("");
+				menuNo = sc.nextLine();
+				if(menuNo.equals("1")) {
+					cs.getMember();
+				}else {
+					SS.getMemberSubject();
+				}
+				
 			}else if (menuNo.equals("2")) {
 				//2. 학생 개개인 조회
 				cs.getonlymember();
 			}else if (menuNo.equals("3")){
-				//자습실관리
+				cs.getSelfInfo();
 			}else if (menuNo.equals("4")) {
-				//
+				//회원관리
 				
-				System.out.println("| 1. 새로운 회원 등록 | 2. 학생 강의 정보 등록 | 3. 회원 수정 | 4. 뒤로가기");
+				System.out.println("| 1. 새로운 회원 등록 | 2. 학생 강의 정보 등록 | 3. 회원 수정 | 4. 회원 삭제 | 5. 뒤로가기");
 				menuNo = sc.nextLine();
 				if(menuNo.equals("1")) {
 					cs.insertMember();
@@ -49,8 +58,10 @@ public class ClassApp {
 					System.out.println("| 1.회원 정보 수정 | 2. 학생 과목 관련 수정 | 3. 학생 강의 정보 수정");
 					menuNo = sc.nextLine();
 					if(menuNo.equals("1")) {
-						System.out.println("| 1. 전화번호 수정 | 2. 주소 수정 | 3. 학교 수정 | 4. 타입 수정");
+						
+						System.out.println("| 1. 전화번호 수정 | 2. 주소 수정 | 3. 학교 수정 | 4. 타입 수정 ");
 						menuNo = sc.nextLine();
+						
 						if(menuNo.equals("1")) {
 							cs.updatePhone();
 						}else if(menuNo.equals("2")) {
@@ -64,6 +75,7 @@ public class ClassApp {
 					}else if(menuNo.equals("2")) {
 						System.out.println("| 1. 미적분 | 2. 확률과 통계 | 3. 수학1 | 4. 수학2 | 5. 기하");
 						menuNo = sc.nextLine();
+						
 						if(menuNo.equals("1")) {
 							//미적분
 						}else if(menuNo.equals("2")) {
@@ -87,8 +99,13 @@ public class ClassApp {
 							cs.updateGrade();
 						}
 					}
-					break;
+					
+				}else if(menuNo.equals("4")) {
+					cs.deleteMember();
+					
 				}
+				
+				break;
 				
 				
 			}else if (menuNo.equals("5")) {
@@ -102,8 +119,12 @@ public class ClassApp {
 	
 	
 	private void menu() {
-		System.out.println("| 1. 전체 수강생 조회 | 2. 학생 정보 조회 | 3. 자습실 관리 |"
-				+ " 4. 회원 관리 | 5. 뒤로가기 | ");
+		System.out.println("=======================*** 김수학수학학원 MANAGER MODE*** ===========================");
+		System.out.println("");
+		System.out.println("  1. 전체 학생 정보 조회 | 2. 단일 회원 정보 조회 | 3. 자습실 조회 |"
+				+ " 4. 회원 관리 | 5. 로그아웃 ");
+		System.out.println("");
+		System.out.println("=================================================================================");
 	}
 	
 }
