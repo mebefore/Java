@@ -61,15 +61,7 @@ public class ClassDAO extends DAO {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	//단건 조회
+	//단건 조회(member)
 	public Member getonlyMember(String memberId) {
 		Member member = null;
 		try {
@@ -84,7 +76,7 @@ public class ClassDAO extends DAO {
 				member = new Member();
 				member.setMemberName(rs.getString("member_name"));
 				member.setMemberId(rs.getString("member_id"));
-				member.setMemberNum(rs.getInt("member_num"));
+				member.setMemberNum(rs.getString("member_num"));
 				member.setMemberAddr(rs.getString("member_addr"));
 				member.setMemberSchool(rs.getString("member_school"));
 				member.setMemberType(rs.getString("member_type"));
@@ -97,6 +89,68 @@ public class ClassDAO extends DAO {
 		return member;
 		
 	}
+	
+	
+	//단건 조회(Class)
+		public Class getonlyClass(String memberId) {
+			Class cs = null;
+			try {
+				conn();
+				String sql = "SELECT * FROM CLASS WHERE MEMBER_ID = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, memberId);
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					cs = new Class();
+					cs.setMemberId(rs.getString("member_id"));
+					cs.setMemberName(rs.getString("member_name"));
+					cs.setMemberTeacher(rs.getString("member_teacher"));
+					cs.setMemberClass(rs.getString("member_class"));
+					cs.setMemberGrade(rs.getString("member_grade"));
+					
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				disconn();
+			}
+			return cs;
+			
+		}
+		
+		
+	//단건 조회(subject)
+			public Subject getonlySubject(String memberId) {
+				Subject sj = null;
+				try {
+					conn();
+					String sql = "SELECT * FROM SUBJECT WHERE MEMBER_ID = ?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, memberId);
+						
+					rs = pstmt.executeQuery();
+						
+					if(rs.next()) {
+						sj = new Subject();
+							
+						sj.setMemberId(rs.getString("member_id"));
+						sj.setMemberName(rs.getString("member_name"));
+						sj.setCalculus(rs.getString("calculus"));
+						sj.setProbability(rs.getString("probability"));
+						sj.setMath1(rs.getString("math1"));
+						sj.setMath2(rs.getString("math2"));
+						sj.setGeometry(rs.getString("geometry"));
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					disconn();
+				}
+				return sj;
+				
+			}		
 	
 	
 	//회원 삭제
@@ -118,7 +172,43 @@ public class ClassDAO extends DAO {
 		return result;
 	}
 	
-	
+	//회원 삭제(Class)
+		public int deleteClass(String memberName) {
+			int result = 0;
+			try {
+				conn();
+				String sql = "DELETE MEMBER WHERE MEMBER_NAME = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1,memberName);
+				
+				result = pstmt.executeUpdate();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				disconn();
+			}
+			return result;
+		}
+		
+		//회원 삭제(Subject)
+				public int deleteSubject(String memberId) {
+					int result = 0;
+					try {
+						conn();
+						String sql = "DELETE MEMBER WHERE MEMBER_ID = ?";
+						pstmt = conn.prepareStatement(sql);
+						pstmt.setString(1,memberId);
+						
+						result = pstmt.executeUpdate();
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					}finally {
+						disconn();
+					}
+					return result;
+				}
 	
 	
 	//자습실 멤버 조회
@@ -139,6 +229,8 @@ public class ClassDAO extends DAO {
 				
 				while(rs.next()) {
 					sf = new Self();
+//					sf.setSelfMember(rs.getInt("self_member"));
+//					sf.setSelfLimit(rs.getInt("self_limit"));
 					sf.setMemberId(rs.getString("member_id"));
 					sf.setSelfStart(rs.getDate("self_start"));
 					sf.setSelfFinish(rs.getDate("self_finish"));
@@ -168,7 +260,7 @@ public class ClassDAO extends DAO {
 			pstmt.setString(1, member.getMemberName());
 			pstmt.setString(2,member.getMemberId());
 			pstmt.setString(3, member.getMemberPw());
-			pstmt.setInt(4,member.getMemberNum());
+			pstmt.setString(4,member.getMemberNum());
 			pstmt.setString(5,member.getMemberAddr());
 			pstmt.setString(6,member.getMemberSchool());
 			pstmt.setString(7, member.getMemberType());
@@ -189,12 +281,13 @@ public class ClassDAO extends DAO {
 		int result = 0;
 		try {
 			conn();
-			String sql = "INSERT INTO CLASS VALUES (?,?,?,?)";
+			String sql = "INSERT INTO CLASS VALUES (?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, cs.getMemberName());
-			pstmt.setString(2, cs.getMemberTeacher());
-			pstmt.setString(3, cs.getMemberClass());
-			pstmt.setString(4,cs.getMemberGrade());
+			pstmt.setString(1,cs.getMemberId());
+			pstmt.setString(2, cs.getMemberName());
+			pstmt.setString(3, cs.getMemberTeacher());
+			pstmt.setString(4, cs.getMemberClass());
+			pstmt.setString(5,cs.getMemberGrade());
 			
 			result = pstmt.executeUpdate();
 			
@@ -246,10 +339,10 @@ public class ClassDAO extends DAO {
 		
 		try {
 			conn();
-			String sql = "UPDATE MEMBER SET MEMBER_NUM = ? WHERE MEMBER_NAME = ?";
+			String sql = "UPDATE MEMBER SET MEMBER_NUM = ? WHERE MEMBER_ID = ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, member.getMemberNum());
-			pstmt.setString(2, member.getMemberName());
+			pstmt.setString(1, member.getMemberNum());
+			pstmt.setString(2, member.getMemberId());
 			
 			result = pstmt.executeUpdate();
 					
@@ -267,10 +360,10 @@ public class ClassDAO extends DAO {
 			
 			try {
 				conn();
-				String sql = "UPDATE MEMBER SET MEMBER_TYPE = ? WHERE MEMBER_NAME = ?";
+				String sql = "UPDATE MEMBER SET MEMBER_TYPE = ? WHERE MEMBER_ID = ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, member.getMemberType());
-				pstmt.setString(2, member.getMemberName());
+				pstmt.setString(2, member.getMemberId());
 				
 				result = pstmt.executeUpdate();
 						
@@ -289,10 +382,10 @@ public class ClassDAO extends DAO {
 	
 		try {
 			conn();
-			String sql = "UPDATE MEMBER SET MEMBER_ADDR = ? WHERE MEMBER_NAME = ?";
+			String sql = "UPDATE MEMBER SET MEMBER_ADDR = ? WHERE MEMBER_ID = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, member.getMemberAddr());
-			pstmt.setString(2, member.getMemberName());
+			pstmt.setString(2, member.getMemberId());
 			
 			result = pstmt.executeUpdate();
 			
@@ -310,10 +403,10 @@ public class ClassDAO extends DAO {
 	
 		try {
 			conn();
-			String sql = "UPDATE MEMBER SET MEMBER_TYPE = ? WHERE MEMBER_NAME = ?";
+			String sql = "UPDATE MEMBER SET MEMBER_TYPE = ? WHERE MEMBER_ID = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, member.getMemberType());
-			pstmt.setString(2, member.getMemberName());
+			pstmt.setString(2, member.getMemberId());
 			
 			result = pstmt.executeUpdate();
 			

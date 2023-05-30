@@ -12,6 +12,8 @@ public class Self {
 	private String selfApply;
 	
 	
+	
+	
 	public String getMemberId() {
 		return memberId;
 	}

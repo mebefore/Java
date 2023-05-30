@@ -39,20 +39,32 @@ public class MemberService {
 	}
 
 	public void join() {
-		Member member = new Member();
-		System.out.println("======회원가입========");
+	    Member member = new Member();
+	    System.out.println("======회원가입========");
 
-		System.out.println("| 이름 > ");
-		member.setMemberName(sc.nextLine());
+	    while (true) {
+	        System.out.println("| 이름 > ");
+	        member.setMemberName(sc.nextLine());
 
-		System.out.println("| 아이디 > ");
-		member.setMemberId(sc.nextLine());
+	        System.out.println("| 아이디 > ");
+	        String memberId = sc.nextLine();
+
+	        // 중복 체크
+	        if (MemberDAO.getInstance().isMemberIdExists(memberId)) {
+	            System.out.println("이미 사용 중인 아이디입니다. 다른 아이디를 입력해주세요.");
+	        } else {
+	            member.setMemberId(memberId);
+	            break;  // 유효한 아이디 입력 시 반복문 종료
+	        }
+	    }
+
+	
 
 		System.out.println("| 비밀번호 > ");
 		member.setMemberPw(sc.nextLine());
 
 		System.out.println(" | 전화번호 > ");
-		member.setMemberNum(Integer.parseInt(sc.nextLine()));
+		member.setMemberNum((sc.nextLine()));
 
 		System.out.println("| 주소 > ");
 		member.setMemberAddr(sc.nextLine());
@@ -82,8 +94,7 @@ public class MemberService {
 			System.out.println("휴대폰 번호는 " + list.get(i).getMemberNum() + "입니다.");
 			System.out.println("등록된 주소는 " + list.get(i).getMemberAddr() + "입니다.");
 			System.out.println("등록된 학교는 " + list.get(i).getMemberSchool() + "입니다.");
-
-			// System.out.println("학원등록일은 " + list.get(i).getMemberId()+"입니다.");
+			System.out.println("");
 		}
 	}
 

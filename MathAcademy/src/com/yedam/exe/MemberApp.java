@@ -56,7 +56,7 @@ public class MemberApp {
 					//-> 자습실 내역이 존재하지 않습니다 (신청하지 않았으면)
 						
 					}else if(selectNo.equals("2")) {
-						System.out.println("| 1. 신청 | 2. 연장 | 3. 취소 | 4. 뒤로가");
+						System.out.println("| 1. 신청 | 2. 연장 | 3. 취소 | 4. 뒤로가기");
 						selectNo = sc.nextLine();
 						
 						if(selectNo.equals("1")) {

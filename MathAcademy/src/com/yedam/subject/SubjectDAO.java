@@ -115,4 +115,113 @@ public class SubjectDAO extends DAO{
 			return list;
 			
 		}
+		
+	//미적분 수정
+	public int updateCal (Subject sj) {
+		int result = 0;
+		
+		try {
+			conn();
+			String sql = "UPDATE SUBJECT SET CALCULUS = ? WHERE MEMBER_ID = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, sj.getCalculus());
+			pstmt.setString(2, sj.getMemberId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			disconn();
+		}
+		return result;
+	}
+
+	//확통 수정
+		public int updatePro (Subject sj) {
+			int result = 0;
+			
+			try {
+				conn();
+				String sql = "UPDATE SUBJECT SET PROBABILITY = ? WHERE MEMBER_ID = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, sj.getProbability());
+				pstmt.setString(2, sj.getMemberId());
+				
+				result = pstmt.executeUpdate();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				disconn();
+			}
+			return result;
+		}
+	
+		
+		//수학1 수정
+			public int updateMath1 (Subject sj) {
+				int result = 0;
+					
+				try {
+					conn();
+					String sql = "UPDATE SUBJECT SET MATH1 = ? WHERE MEMBER_ID = ?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, sj.getMath1());
+					pstmt.setString(2, sj.getMemberId());
+						
+					result = pstmt.executeUpdate();
+						
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					disconn();
+				}
+				return result;
+			}	
+	
+			
+		//수학2 수정
+		public int updateMath2 (Subject sj) {
+			int result = 0;
+					
+			try {
+				conn();
+				String sql = "UPDATE SUBJECT SET MATH2 = ? WHERE MEMBER_ID = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, sj.getMath2());
+				pstmt.setString(2, sj.getMemberId());
+						
+				result = pstmt.executeUpdate();
+						
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				disconn();
+			}
+			return result;
+		}		
+	
+		
+		//수학2 수정
+			public int updateGeo (Subject sj) {
+				int result = 0;
+							
+				try {
+					conn();
+					String sql = "UPDATE SUBJECT SET GEOMETRY = ? WHERE MEMBER_ID = ?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, sj.getGeometry());
+					pstmt.setString(2, sj.getMemberId());
+								
+					result = pstmt.executeUpdate();
+								
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					disconn();
+				}
+				return result;
+			}			
+
 }

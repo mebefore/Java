@@ -6,31 +6,54 @@ import java.util.Scanner;
 import javax.security.auth.Subject;
 
 import com.yedam.member.Member;
+import com.yedam.member.MemberDAO;
 import com.yedam.self.Self;
 import com.yedam.subject.SubjectDAO;
 
 public class ClassService {
 	Scanner sc = new Scanner(System.in);
 	
-	//1.전체 수강생 조회
+	//1.전체 수강생 조회(class 전체 정보)
 	public void getMember() {
-		System.out.println("==================전체 학생 정보 조회====================");
+		System.out.println("전체 학생 정보 조회 >");
 		List<Class> list = ClassDAO.getInstance().getClassInfo();
 		
 		for(int i=0; i<list.size(); i++) {
 			//이름 아이디 (비번) 번호 주소 학교 타입
-			//전체학생을어캐조회하지
+			System.out.println("");
 			System.out.print(i+1+".");
 			System.out.print(" 이름 : " + list.get(i).getMemberName()+" |");
 			System.out.print(" 담당 선생님 : " + list.get(i).getMemberTeacher()+" |");
 			System.out.print(" 반 : " + list.get(i).getMemberClass()+" |");
 			System.out.println(" 등급: " + list.get(i).getMemberGrade());
-			
 			System.out.println("");
-			
 			
 		}
 	}
+	
+	//2. member 전체 정보
+	public void getMembers() {
+		System.out.println("전체 학생 정보 조회 >");
+		List<Member> list = MemberDAO.getInstance().getMemberInfo1();
+		
+		for(int i=0; i<list.size(); i++) {
+			//이름 아이디 (비번) 번호 주소 학교 타입
+			System.out.println("");
+			System.out.print(i+1+".");
+			System.out.print(" 이름 : " + list.get(i).getMemberName()+" |");
+			System.out.println(" 아이디 : " + list.get(i).getMemberId());
+			System.out.print("   휴대폰 번호 : " + list.get(i).getMemberNum()+" |");
+			System.out.print(" 주소 : " + list.get(i).getMemberAddr()+" |");
+			System.out.println("  학교 : " + list.get(i).getMemberSchool());
+			System.out.print("   타입 : " + list.get(i).getMemberType());
+			System.out.println("");
+			
+		}
+	}
+	
+	
+	
+	
 	
 	
 	
@@ -56,9 +79,80 @@ public class ClassService {
 		
 	}
 	
+	
+	//2. 학생 단건 조회(Class)
+		public void getonlyClass() {
+			System.out.println("========================");
+			System.out.println("| 조회할 회원 아이디 입력 >");
+			String memberId = sc.nextLine();
+			
+			Class cs = ClassDAO.getInstance().getonlyClass(memberId);
+			System.out.println("========================");
+			if(cs != null) {
+				//이름 아이디 폰번 주소 학교 타입
+				System.out.println("| 아이디 : " + cs.getMemberId());
+				System.out.println("| 이름 : " + cs.getMemberName());
+				System.out.println("| 담당 선생님 : " + cs.getMemberTeacher());
+				System.out.println("| 반 : " + cs.getMemberClass());
+				System.out.println("| 내신 등급 : "+ cs.getMemberGrade());
+			}else {
+				System.out.println("| 조회되는 정보가 없습니다.");
+			}
+			
+		}
+		
+		
+	//2. 학생 단건 조회(subject)
+		public void getonlySubject() {
+			System.out.println("========================");
+			System.out.println("| 조회할 회원 아이디 입력 >");
+			String memberId = sc.nextLine();
+					
+			com.yedam.subject.Subject sj = ClassDAO.getInstance().getonlySubject(memberId);
+			System.out.println("========================");
+			if(sj != null) {
+
+				System.out.println("| 아이디 : " + sj.getMemberId());
+				System.out.println("| 이름 : " + sj.getMemberName());
+				System.out.println("| 미적분 : " + sj.getCalculus());
+				System.out.println("| 확률과 통계 : " + sj.getProbability());
+				System.out.println("| 수학1 : " + sj.getMath1());
+				System.out.println("| 수학2 : " + sj.getMath2());
+				System.out.println("| 기하 : " + sj.getGeometry());
+			}else {
+				System.out.println("| 조회되는 정보가 없습니다.");
+			}
+					
+		}
+		
+		
+		//오류나서 냅둔거 근데 위에 com.yedam 어쩌고로 하니 되긴 됏음 뭐지?
+//		//2. 학생 단건 조회(subject)
+//				public void getonlySubject() {
+//					System.out.println("========================");
+//					System.out.println("| 조회할 회원 아이디 입력 >");
+//					String memberId = sc.nextLine();
+//							
+//					Subject sj = ClassDAO.getInstance().getonlySubject(memberId);
+//					System.out.println("========================");
+//					if(sj != null) {
+//
+//						System.out.println("| 아이디 : " + sj.getMemberId());
+//						System.out.println("| 이름 : " + sj.getMemberName());
+//						System.out.println("| 미적분 : " + sj.getCalculus());
+//						System.out.println("| 확률과 통계 : " + sj.getProbability());
+//						System.out.println("| 수학1 : " + sj.getMath1());
+//						System.out.println("| 수학2 : " + sj.getMath2());
+//						System.out.println("| 기하 : " + sj.getGeometry());
+//					}else {
+//						System.out.println("| 조회되는 정보가 없습니다.");
+//					}
+//							
+//				}
+				
 	//3. 자습실 등록 멤버 조회
 	public void getSelfInfo() {
-		System.out.println("=====자습실 신청자 목록=====");
+		System.out.println("=============자습실 신청자 목록==============");
 		List<Self> list = ClassDAO.getInstance().getSelfInfo();
 		for(int i=0; i<list.size(); i++) {
 			//아이디 시작 끝 apply 
@@ -90,7 +184,7 @@ public class ClassService {
 		member.setMemberPw(sc.nextLine());
 		
 		System.out.println("전화번호 >");
-		member.setMemberNum(Integer.parseInt(sc.nextLine()));
+		member.setMemberNum((sc.nextLine()));
 		
 		System.out.println("주소 >");
 		member.setMemberAddr(sc.nextLine());
@@ -120,6 +214,10 @@ public class ClassService {
 			Class cs = new Class();
 			System.out.println("=== 학생 강의 정보 등록=== ");
 			
+			
+			System.out.println("| 학생 아이디 입력 > ");
+			cs.setMemberId(sc.nextLine());
+			
 			System.out.println("| 학생 이름 입력 > ");
 			cs.setMemberName(sc.nextLine());
 			
@@ -129,7 +227,7 @@ public class ClassService {
 			System.out.println("| 클래스 입력 > ");
 			cs.setMemberClass(sc.nextLine());
 			
-			System.out.println("| 수학 등급 입력 > ");
+			System.out.println("| 내신 등급 입력 > ");
 			cs.setMemberGrade(sc.nextLine());
 			
 			int result = ClassDAO.getInstance().insertClass(cs);
@@ -171,18 +269,19 @@ public class ClassService {
 			Member member = new Member();
 			System.out.println("==========회원 정보 수정==========");
 			
-			System.out.println("| 수정할 회원 이름 > ");
-			member.setMemberName(sc.nextLine());
+			System.out.println("| 수정할 회원 아이디> ");
+			member.setMemberId(sc.nextLine());
 			
 			System.out.println("| 수정할 전화번호 > ");
-			member.setMemberNum(Integer.parseInt(sc.nextLine()));
+			member.setMemberNum((sc.nextLine()));
 			
 			int result = ClassDAO.getInstance().updatePhone(member);
 			
 			if(result > 0) {
 				System.out.println("전화번호 수정 완료");
+				System.out.println("");
 			}else {
-				System.out.println("전화번호 수정 실패");
+				System.out.println("아이디를 다시 확인해주세요.");
 			}
 		
 			
@@ -197,7 +296,7 @@ public class ClassService {
 			System.out.println("========주소 수정========");
 			
 			System.out.println("| 수정할 회원 이름 > ");
-			member.setMemberName(sc.nextLine());
+			member.setMemberId(sc.nextLine());
 			
 			System.out.println("| 수정 주소 입력 > ");
 			member.setMemberAddr(sc.nextLine());
@@ -206,8 +305,9 @@ public class ClassService {
 			
 			if(result > 0) {
 				System.out.println("주소 수정 완료");
+				System.out.println("");
 			}else {
-				System.out.println("주소 수정 실패");
+				System.out.println("아이디를 다시 확인해주세요.");
 			}
 			
 		}
@@ -218,7 +318,7 @@ public class ClassService {
 			System.out.println("========학교 수정========");
 			
 			System.out.println("| 수정할 회원 이름 > ");
-			member.setMemberName(sc.nextLine());
+			member.setMemberId(sc.nextLine());
 			
 			System.out.println("| 수정 학교 입력 > ");
 			member.setMemberSchool(sc.nextLine());
@@ -227,8 +327,9 @@ public class ClassService {
 			
 			if(result > 0) {
 				System.out.println("학교 수정 완료");
+				System.out.println("");
 			}else {
-				System.out.println("학교 수정 실패.");
+				System.out.println("아이디를 다시 확인해주세요.");
 			}
 		}
 		
@@ -261,7 +362,7 @@ public class ClassService {
 			System.out.println("관리자 - M , 회원 - S ");
 			
 			System.out.println("| 수정할 회원 이름 > ");
-			member.setMemberName(sc.nextLine());
+			member.setMemberId(sc.nextLine());
 			
 			System.out.println("| 수정할 타입 입력 > ");
 			member.setMemberType(sc.nextLine());
@@ -334,7 +435,39 @@ public class ClassService {
 		
 	}
 				
-				
+	//회원 삭제 (class table삭제)
+		public void deleteClass() {
+			System.out.println("삭제할 회원 이름을 입력해주세요.");
+			String memberName = sc.nextLine();
+			
+			int result = ClassDAO.getInstance().deleteClass(memberName);
+			
+			if(result > 0) {
+				System.out.println("");
+				System.out.println("삭제가 완료되었습니다.");
+			}else {
+				System.out.println("");
+				System.out.println("확인 후 다시 입력하세요.");
+			}
+			
+		}
+		
+		//회원 삭제 (class table삭제)
+				public void deleteSubject() {
+					System.out.println("삭제할 회원 아이디를 입력해주세요.");
+					String memberId = sc.nextLine();
+					
+					int result = ClassDAO.getInstance().deleteSubject(memberId);
+					
+					if(result > 0) {
+						System.out.println("");
+						System.out.println("삭제가 완료되었습니다.");
+					}else {
+						System.out.println("");
+						System.out.println("확인 후 다시 입력하세요.");
+					}
+					
+				}
 				
 				
 				

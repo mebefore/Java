@@ -3,9 +3,6 @@ package com.yedam.subject;
 import java.util.List;
 import java.util.Scanner;
 
-import com.yedam.Class.Class;
-import com.yedam.Class.ClassDAO;
-
 public class SubjectService {
 	Scanner sc = new Scanner(System.in);
 	
@@ -88,6 +85,114 @@ public class SubjectService {
 					
 				}
 			}
-			
+
+		//미적분 수정
+		public void updateCal() {
+			Subject sj = new Subject();
+			System.out.println("========미적분 등급========");
+				
+			System.out.println("| 수정할 회원 아이디 > ");
+			sj.setMemberId(sc.nextLine());
+				
+			System.out.println("| 수정 등급 입력 > ");
+			sj.setCalculus(sc.nextLine());
+				
+			int result = SubjectDAO.getInstance().updateCal(sj);
+				
+			if(result > 0) {
+				System.out.println("등급 수정 완료");
+				System.out.println("");
+			}else {
+				System.out.println("아이디를 다시 확인해주세요.");
+			}
+		}	
 		
+		
+		
+		//확통 수정
+			public void updatePro() {
+				Subject sj = new Subject();
+				System.out.println("========확률과 통계 등급========");
+						
+				System.out.println("| 수정할 회원 아이디 > ");
+				sj.setMemberId(sc.nextLine());
+						
+				System.out.println("| 수정 등급 입력 > ");
+				sj.setProbability(sc.nextLine());
+						
+				int result = SubjectDAO.getInstance().updatePro(sj);
+						
+				if(result > 0) {
+					System.out.println("등급 수정 완료");
+					System.out.println("");
+				}else {
+					System.out.println("아이디를 다시 확인해주세요.");
+				}
+			}	
+			
+			
+		//수학1 수정
+			public void updateMath1() {
+				Subject sj = new Subject();
+				System.out.println("========수학1 등급========");
+						
+				System.out.println("| 수정할 회원 아이디 > ");
+				sj.setMemberId(sc.nextLine());
+						
+				System.out.println("| 수정 등급 입력 > ");
+				sj.setMath1(sc.nextLine());
+						
+				int result = SubjectDAO.getInstance().updateMath1(sj);
+						
+				if(result > 0) {
+					System.out.println("등급 수정 완료");
+					System.out.println("");
+				}else {
+					System.out.println("아이디를 다시 확인해주세요.");
+				}
+			}				
+				
+
+			//수학2 수정
+			public void updateMath2() {
+				Subject sj = new Subject();
+				System.out.println("========수학2 등급========");
+						
+				System.out.println("| 수정할 회원 아이디 > ");
+				sj.setMemberId(sc.nextLine());
+						
+				System.out.println("| 수정 등급 입력 > ");
+				sj.setMath2(sc.nextLine());
+						
+				int result = SubjectDAO.getInstance().updateMath2(sj);
+						
+				if(result > 0) {
+					System.out.println("등급 수정 완료");
+					System.out.println("");
+				}else {
+					System.out.println("아이디를 다시 확인해주세요.");
+				}
+			}		
+
+			
+			//기하 수정
+			public void updateGeo() {
+				Subject sj = new Subject();
+				System.out.println("========기하 등급========");
+						
+				System.out.println("| 수정할 회원 아이디 > ");
+				sj.setMemberId(sc.nextLine());
+						
+				System.out.println("| 수정 등급 입력 > ");
+				sj.setGeometry(sc.nextLine());
+						
+				int result = SubjectDAO.getInstance().updateGeo(sj);
+						
+				if(result > 0) {
+					System.out.println("등급 수정 완료");
+					System.out.println("");
+				}else {
+					System.out.println("아이디를 다시 확인해주세요.");
+				}
+			}			
 }

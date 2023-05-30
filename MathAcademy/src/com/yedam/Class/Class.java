@@ -2,12 +2,7 @@ package com.yedam.Class;
 
 public class Class {
 	
-
-//			member_name varchar2(20) primary key,
-//			member_teacher varchar2(50),
-//			member_class varchar2(20),
-//			member_grade varchar2(10));
-	
+	private String memberId;
 	private String memberName;
 	private String memberTeacher;
 	private String memberClass;
@@ -19,6 +14,12 @@ public class Class {
 	}
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
+	}
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 	public String getMemberTeacher() {
 		return memberTeacher;
